@@ -8,10 +8,9 @@
 
 str = "I am an NLPer"
 
-module Enumerable
-  def ngram(n)
-    each_cons(n).to_a
-  end
+def ngram(words,n)
+  words.each_cons(n).to_a
 end
-print str.chars.ngram(2)
-print str.split(/\W+/).ngram(2)
+
+print ngram(str.chars, 2)
+#print str.split(/\W+/).ngram(2)
