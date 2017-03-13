@@ -5,4 +5,5 @@ lines = []
 str.each_line do |line|
   lines.push(line)
 end
-lines.each_slice(lines.count / ARGV[0].to_i) {|s| p s }
+
+lines.each_slice((lines.count.to_f / ARGV[0].to_i).ceil) {|s| p s }
