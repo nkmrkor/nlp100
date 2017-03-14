@@ -7,11 +7,11 @@ str.each_line do |line|
   lines.push(line.split(/\t|\n/))
 end
 
-lines.each{|line|
+lines.each do |line|
   line[0],line[2] = line[2],line[0]
-}
-lines.sort!.each{|line|
+end
+lines.sort!.each do |line|
   line[0],line[2] = line[2],line[0]
-}
+end
 
 p lines
