@@ -6,7 +6,7 @@ lines = []
 str.each_line do |line|
   lines.push(line.split(/\t|\n/))
 end
-
+# 別のarrayにいれる 破壊的なことしない
 lines.each do |line|
   line[0],line[2] = line[2],line[0]
 end
