@@ -3,17 +3,6 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
+puts File.readlines('./jawiki-country.json').map{|line| JSON.parse(line)}.find{|item| item["title"] == "イギリス"}
 
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
-
-parsed.select do |item|
-  if item["title"] == "イギリス"
-    puts item["text"]
-  end
-end
+# 入出力は副作用 選択と出力をわける
