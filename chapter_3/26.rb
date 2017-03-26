@@ -5,26 +5,11 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
-text = []
-basic = []
+puts File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}.to_s.scan(/({{基礎情報.*}})/).
 
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
+#basic = text.scan(/(({{基礎情報.*\n)(.*\n)*(}}))/)[0][0].scan(/(\|)(.*?)(=)(.*?)(\n)/).map{|i| [i[1].strip,i[3].strip]}.to_h
 
-parsed.select{|item|
-  if item["title"] == "イギリス"
-    text = item["text"]
-  end
-}
-
-basic = text.scan(/(({{基礎情報.*\n)(.*\n)*(}}))/)[0][0].scan(/(\|)(.*?)(=)(.*?)(\n)/).map{|i| [i[1].strip,i[3].strip]}.to_h
-
-puts basic.map{|key,value| [key,value.gsub(/'''/,'')]}
+#puts basic.map{|key,value| [key,value.gsub(/'''/,'')]}
 
 # * 直前の表現の0回以上の繰り返しにマッチ
 # (...) 正規表現をグループ化
