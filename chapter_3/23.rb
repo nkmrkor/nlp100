@@ -3,36 +3,10 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
-text = []
-section = []
-
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
-
-parsed.select{|item|
-  if item["title"] == "イギリス"
-    text = item["text"]
-  end
-}
-
-text.scan(/(^=+)(.*?)(=+)/).each do |w1,w2,w3|
-  if w1 == '=='
-    puts w2 + ':1'
-  elsif w1 == '==='
-    puts w2 + ':2'
-  else
-    puts w2 + ':3'
-  end
-end
+puts File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}.to_s.scan(/(={2,3})(.*?)(={2,3})/).map{|y| if y[0]== '==' then y[1]+':1' elsif y[0] == '===' then y[1]+':2' else y[1]+y[0] end }
 
 # [[Category:..|*]],[[Category:..]],[[Category:..|..]]
-# [...] []内にいずれか1文字にマッチ
-# [^...] []内に含まれない1文字にマッチ
+# [...] []
 # * 直前の表現の0回以上の繰り返しにマッチ
 # + 直前の表現の1回以上の繰り返しにマッチ
 # (...) 正規表現をグループ化
