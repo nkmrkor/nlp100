@@ -3,23 +3,7 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
-text = []
-
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
-
-parsed.select{|item|
-  if item["title"] == "イギリス"
-    text = item["text"]
-  end
-}
-
-p text.scan(/(({{基礎情報.*\n)(.*\n)*(}}))/)[0][0].scan(/(\|)(.*?)(=)(.*?)(\n)/).map{|i| [i[1],i[3]]}.to_h
+puts File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}.to_s.scan(/{{基礎情報.*}}/)
 
 
 # * 直前の表現の0回以上の繰り返しにマッチ
