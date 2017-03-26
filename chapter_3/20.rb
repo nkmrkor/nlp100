@@ -3,17 +3,6 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
-
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
-
-parsed.select do |item|
-  if item["title"] == "イギリス"
-    puts item["text"]
-  end
-end
+puts File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}
+#File.write("hoge.txt", File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"})
+#p File.open('sample.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}
