@@ -3,23 +3,7 @@
 
 require 'json'
 
-file_path='./jawiki-country.json'
-parsed = []
-text = []
-
-open(file_path) do |file|
-    file.each_line do |line|
-        parsed.push(JSON.parse(line))
-    end
-end
-
-parsed.select do |item|
-  if item["title"] == "イギリス"
-    text = item["text"]
-  end
-end
-
-puts text.scan(/\[\[Category:([^|\]]+)/)
+puts File.readlines('./jawiki-country.json').map{|line| JSON.parse(line)}.find{|item| item['title'] == 'イギリス'}['text'].scan(/\[\[Category:([^|\]]+)/)
 
 # [[Category:..|*]],[[Category:..]],[[Category:..|..]]
 # [...] []内にいずれか1文字にマッチ

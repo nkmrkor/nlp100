@@ -3,6 +3,9 @@
 
 require 'json'
 
-puts File.readlines('./jawiki-country.json').map{|line| JSON.parse(line)}.find{|item| item["title"] == "イギリス"}
+p File.readlines('jawiki-country.json').map{|line| JSON.parse(line)}.find{|item| item["title"] == "イギリス"}
+
 
 # 入出力は副作用 選択と出力をわける
+#File.write("hoge.txt", File.open('jawiki-country.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"})
+#p File.open('sample.json').readlines.map{|x| JSON.parse(x)}.select{|item| item["title"]=="イギリス"}
