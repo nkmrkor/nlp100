@@ -3,4 +3,9 @@
 
 require 'json'
 
-puts File.readlines('./jawiki-country.json').map{|line| JSON.parse(line)}.find{|item| item['title'] == 'イギリス'}['text'].scan(/(\[\[ファイル:)(.*)(\]\])/)
+puts File.readlines('./jawiki-country.json')
+         .map{|line| JSON.parse(line)}
+         .find{|item| item['title'] == 'イギリス'}['text']
+         .scan(/ファイル:([^|]+)/)
+
+#/ファイル:([^|]+)/
