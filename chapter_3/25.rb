@@ -4,8 +4,10 @@
 require 'json'
 
 puts File.readlines('./jawiki-country.json')
-         .map{|line| JSON.parse(line)}.find{|item| item['title'] == 'イギリス'}['text']
-         .scan(/(({{基礎情報.*\n)(.*\n)*(}}))/)[0][0].scan(/(\|)(.*?)(=)(.*?)(\n)/)
+         .map{|line| JSON.parse(line)}
+         .find{|item| item['title'] == 'イギリス'}['text']
+         .scan(/(({{基礎情報)(.*\n)*(}}\n))/)[0][0]
+         .scan(/(\|)(.*)(=)(.*)(\n)/)
          .map{|i| [i[1].strip, i[3].strip]}.to_h
 
 ## {{基礎情報}} の中で　行頭+|
