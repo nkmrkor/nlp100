@@ -2,8 +2,8 @@
 # 記事中に含まれる「基礎情報」テンプレートのフィールド名と値を抽出し，辞書オブジェクトとして格納せよ．
 
 require 'json'
-
-puts File.readlines('./jawiki-country.json')
+require 'pp'
+pp File.readlines('./jawiki-country.json')
          .map{|line| JSON.parse(line)}
          .find{|item| item['title'] == 'イギリス'}['text']
          .scan(/(({{基礎情報)(.*\n)*(}}\n))/)[0][0]
